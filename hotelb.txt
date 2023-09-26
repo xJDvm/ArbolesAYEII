@@ -1,0 +1,8 @@
+[
+    {
+        "name": "Ana Rodriguez",
+        "position": "Gerente de Ventas",
+        "salary": "3500",
+        "hire_date": "2023-07-20"
+    }
+]

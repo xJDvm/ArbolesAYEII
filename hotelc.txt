@@ -1,0 +1,8 @@
+[
+    {
+        "name": "Carlos Gomez",
+        "position": "Chef Ejecutivo",
+        "salary": "2800",
+        "hire_date": "2023-09-05"
+    }
+]

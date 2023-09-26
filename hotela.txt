@@ -1,0 +1,8 @@
+[
+    {
+        "name": "Juan Perez",
+        "position": "Recepcionista",
+        "salary": "2500",
+        "hire_date": "2023-08-15"
+    }
+]

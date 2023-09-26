@@ -1,0 +1,8 @@
+[
+    {
+        "name": "Luis Sánchez",
+        "position": "Jardinero",
+        "salary": "2000",
+        "hire_date": "2023-06-10"
+    }
+]
