@@ -1,7 +1,7 @@
 {
     "Hotel Maravilla": [
         {
-            "NumeroFactura": "001",
+            "NumeroFactura": 1,
             "Fecha": "2023-09-26",
             "Cliente": "Juan P\u00c3\u00a9rez",
             "MetodoPago": "Tarjeta de Cr\u00c3\u00a9dito",
@@ -9,7 +9,7 @@
             "ServiciosAdicionales": "WiFi, Desayuno"
         },
         {
-            "NumeroFactura": "002",
+            "NumeroFactura": 2,
             "Fecha": "2023-09-27",
             "Cliente": "Ana Garc\u00c3\u00ada",
             "MetodoPago": "Efectivo",
@@ -17,7 +17,7 @@
             "ServiciosAdicionales": "WiFi"
         },
         {
-            "NumeroFactura": "a",
+            "NumeroFactura": 3,
             "Fecha": "9/26/23",
             "Cliente": "a",
             "MetodoPago": "a",
@@ -27,7 +27,7 @@
     ],
     "Hotel Luxury": [
         {
-            "NumeroFactura": "001",
+            "NumeroFactura": 1,
             "Fecha": "2023-09-25",
             "Cliente": "Ana L\u00c3\u00b3pez",
             "MetodoPago": "Tarjeta de D\u00c3\u00a9bito",
@@ -37,7 +37,7 @@
     ],
     "Hotel Cali": [
         {
-            "NumeroFactura": "001",
+            "NumeroFactura": 1,
             "Fecha": "2023-09-24",
             "Cliente": "Carlos Rodr\u00c3\u00adguez",
             "MetodoPago": "Efectivo",
@@ -47,7 +47,7 @@
     ],
     "Hotel Banana": [
         {
-            "NumeroFactura": "001",
+            "NumeroFactura": 1,
             "Fecha": "2023-09-23",
             "Cliente": "Marta S\u00c3\u00a1nchez",
             "MetodoPago": "Transferencia Bancaria",

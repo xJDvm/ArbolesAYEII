@@ -1,1 +1,22 @@
-[{"name": "Juan Perez", "position": "Recepcionista", "salary": "2500", "hire_date": "2023-08-15"}]
+[
+    {
+        "name": "Juan Perez",
+        "position": "Recepcionista",
+        "salary": "2500",
+        "hire_date": "2023-08-15",
+        "invoices": [
+            {
+                "invoice_number": "123456",
+                "amount": 1000,
+                "date": "2023-08-01",
+                "payment_method": "Tarjeta de crédito"
+            },
+            {
+                "invoice_number": "789012",
+                "amount": 2000,
+                "date": "2023-08-15",
+                "payment_method": "PayPal"
+            }
+        ]
+    }
+]
