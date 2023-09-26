@@ -1,8 +1,18 @@
-[
-    {
-        "name": "Ana Rodriguez",
-        "position": "Gerente de Ventas",
-        "salary": "3500",
-        "hire_date": "2023-07-20"
-    }
-]
+{
+    "name": "Ana Rodriguez",
+    "position": "Gerente de Ventas",
+    "salary": "3500",
+    "hire_date": "2023-07-20",
+    "invoices": [
+        {
+            "invoice_number": "123456",
+            "amount": 1000,
+            "date": "2023-08-01"
+        },
+        {
+            "invoice_number": "789012",
+            "amount": 2000,
+            "date": "2023-08-15"
+        }
+    ]
+}

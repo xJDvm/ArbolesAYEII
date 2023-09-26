@@ -3,6 +3,18 @@
         "name": "Luis Sánchez",
         "position": "Jardinero",
         "salary": "2000",
-        "hire_date": "2023-06-10"
+        "hire_date": "2023-06-10",
+        "invoices": [
+        {
+            "invoice_number": "123456",
+            "amount": 1000,
+            "date": "2023-08-01"
+        },
+        {
+            "invoice_number": "789012",
+            "amount": 2000,
+            "date": "2023-08-15"
+        }
+    ]
     }
 ]
