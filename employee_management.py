@@ -80,21 +80,37 @@ class EmployeeManagementUI:
         self.update_button = tk.Button(root, text="Actualizar Tabla", command=self.update_table)
         self.update_button.pack()
 
-        # Crear tabla
-        self.tree = ttk.Treeview(root, columns=("Nombre", "Posición", "Salario", "Fecha de Contratación"))
-        self.tree.heading("#1", text="Nombre")
-        self.tree.heading("#2", text="Posición")
-        self.tree.heading("#3", text="Salario")
-        self.tree.heading("#4", text="Fecha de Contratación")
-        self.tree.pack()
+        def cargar_tabla():
+            # Crear tabla con la funcionalidad de ordenar al hacer clic en el encabezado
+            self.tree = ttk.Treeview(root, columns=("Nombre", "Posición", "Salario", "Fecha de Contratación"))
+            self.tree.heading("#1", text="Nombre", command=lambda: self.sort_column("Nombre", False))
+            self.tree.heading("#2", text="Posición", command=lambda: self.sort_column("Posición", False))
+            self.tree.heading("#3", text="Salario", command=lambda: self.sort_column("Salario", False))
+            self.tree.heading("#4", text="Fecha de Contratación", command=lambda: self.sort_column("Fecha de Contratación", False))
+            self.tree.pack()
 
-        self.tree.column("#0", width=0)
+            # Diccionario para rastrear el estado de ordenamiento de las columnas
+            self.sorting_states = {"Nombre": False, "Posición": False, "Salario": False, "Fecha de Contratación": False}
 
-        # Cargar datos desde el archivo correspondiente al hotel al iniciar
-        self.employee_manager.load_data_from_file()
+            self.tree.column("#0", width=0)
 
-        # Cargar datos al iniciar
-        self.update_table()
+            # Cargar datos desde el archivo correspondiente al hotel al iniciar
+            self.employee_manager.load_data_from_file()
+
+            # Cargar datos al iniciar
+            self.update_table()
+        cargar_tabla()
+
+    def sort_column(self, column, reverse):
+        items = [(self.tree.set(item, column), item) for item in self.tree.get_children("")]
+        items.sort(reverse=reverse)
+        for index, (val, item) in enumerate(items):
+            self.tree.move(item, "", index)
+        self.tree.heading(column, text=column + (" ▲" if reverse else " ▼"), command=lambda: self.sort_column(column, not reverse))
+        self.sorting_states[column] = reverse
+
+
+
 
     def add_employee(self):
         # Crea una ventana secundaria para agregar empleado
@@ -158,13 +174,17 @@ class EmployeeManagementUI:
             messagebox.showerror("Error", "Seleccione un empleado de la tabla para eliminar.")
 
     def update_table(self):
-        # Limpia la tabla
+        # Limpia la tabla y los indicadores de orden
+        for column in self.tree["columns"]:
+            self.tree.heading(column, text=column)
+
         for item in self.tree.get_children():
             self.tree.delete(item)
 
         # Obtiene la lista de empleados y la muestra en la tabla
         for employee in self.employee_manager.employees:
             self.tree.insert("", "end", values=(employee.name, employee.position, employee.salary, employee.hire_date))
+
 
 # Si ejecutas este archivo directamente, crea una ventana de gestión de empleados
 if __name__ == "__main__":

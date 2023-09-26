@@ -1,8 +1,1 @@
-[
-    {
-        "name": "Juan Perez",
-        "position": "Recepcionista",
-        "salary": "2500",
-        "hire_date": "2023-08-15"
-    }
-]
+[{"name": "Juan Perez", "position": "Recepcionista", "salary": "2500", "hire_date": "2023-08-15"}, {"name": "1", "position": "1", "salary": "1", "hire_date": "1"}, {"name": "1", "position": "1", "salary": "1", "hire_date": "1"}, {"name": "2", "position": "2", "salary": "2", "hire_date": "2"}]
