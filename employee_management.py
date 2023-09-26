@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import json
 
-from statistics_management import StatisticsUI
+from statistics_management import mostrar_lista
 
 hotel_file_mapping = {
     "Hotel Maravilla": "hotela.txt",
@@ -91,7 +91,7 @@ class EmployeeManagementUI:
         self.update_button.pack()
 
         self.statistics_button = tk.Button(
-            root, text="Estadisticas", command=lambda: StatisticsUI(root))
+            root, text="Estadisticas", command=lambda: mostrar_lista(hotel_name=hotel_name))
         self.statistics_button.pack()
 
         def cargar_tabla():

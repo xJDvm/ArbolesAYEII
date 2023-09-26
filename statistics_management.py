@@ -1,49 +1,80 @@
-from tkinter import *
-from tkinter.ttk import *
+import json
+import tkinter as tk
+import tkinter.ttk as ttk
+
+# Importar el arreglo de facturas JSON
+with open("facturas.json", "r") as f:
+    facturas = json.load(f)
+
+# Función para crear un árbol binario de búsqueda a partir de un arreglo de facturas
 
 
-class StatisticsUI(Toplevel):
-    def __init__(self, master=None):
-        super().__init__(master=master)
-        self.title("Reporte de la Empresa")
-        self.geometry("400x300")
+def crear_arbol_binario(facturas, hotel_name):
+    if not facturas:
+        return None
 
-        label = Label(self, text="Reporte de la Empresa", font=("Arial", 16))
-        label.pack(pady=10)
+    facturas[hotel_name].sort(key=lambda factura: factura["NumeroFactura"])
 
-        report_label = Label(self, text="Ventas: \$100,000")
-        report_label.pack()
+    nodo_raiz = Nodo(facturas[hotel_name][0])
+    for factura in facturas[hotel_name][1:]:
+        nodo_raiz.insertar(factura)
 
-        profit_label = Label(self, text="Ganancias: \$50,000")
-        profit_label.pack()
-        self.cargar_tabla_facturacion()
+    return nodo_raiz
 
-    def cargar_tabla_facturacion(self):
-        # Datos de facturacion
-        datos = [
-            ("Cliente 1", "Tarjeta de Crédito", "\$100"),
-            ("Cliente 2", "Transferencia Bancaria", "\$200"),
-            ("Cliente 3", "Efectivo", "\$50")
-        ]
-        # Crea el Treeview
-        treeview = Treeview(self, columns=(
-            "Nombre", "Método de Pago", "Total"))
-        treeview.heading("#0", text="ID")
-        treeview.heading("Nombre", text="Nombre")
-        treeview.heading("Método de Pago", text="Método de Pago")
-        treeview.heading("Total", text="Total")
+# Clase Nodo para representar un nodo de un árbol binario
 
-        # Ajusta el ancho de la columna de ID
-        treeview.column("#0", width=30, anchor="center")
 
-        # Ajusta las columnas para que se ajusten automáticamente al contenido
-        for column in ("Nombre", "Método de Pago", "Total"):
-            treeview.column(column, width=100, anchor="center")
-            treeview.heading(column, text=column)
+class Nodo:
+    def __init__(self, factura):
+        self.factura = factura
+        self.izquierdo = None
+        self.derecho = None
 
-        # Carga los datos en el Treeview
-        for idx, dato in enumerate(datos):
-            treeview.insert("", "end", text=str(idx + 1), values=dato)
+    def insertar(self, factura):
+        if factura["NumeroFactura"] < self.factura["NumeroFactura"]:
+            if self.izquierdo is None:
+                self.izquierdo = Nodo(factura)
+            else:
+                self.izquierdo.insertar(factura)
+        else:
+            if self.derecho is None:
+                self.derecho = Nodo(factura)
+            else:
+                self.derecho.insertar(factura)
 
-        # Empaqueta el Treeview en la ventana
-        treeview.pack()
+# Función para realizar el recorrido en postorden de un árbol binario
+
+
+def recorrido_postorden(nodo):
+    if nodo is not None:
+        recorrido_postorden(nodo.izquierdo)
+        recorrido_postorden(nodo.derecho)
+        return nodo.factura
+
+# Función para mostrar la ventana con la lista de facturas
+
+
+def mostrar_lista(hotel_name):
+    # Crear la ventana
+    ventana = tk.Toplevel()
+    ventana.title("Lista de facturas")
+
+    # Crear el árbol binario de búsqueda
+    nodo_raiz = crear_arbol_binario(facturas, hotel_name)
+
+    # Realizar el recorrido en postorden del árbol binario
+    lista_facturas = recorrido_postorden(nodo_raiz)
+
+    # Crear el árbol binario de búsqueda
+    columnas = ["Número de factura", "Cliente", "Método de pago",
+                "Estado de pago", "Servicios adicionales"]
+    tree = ttk.Treeview(ventana, columns=columnas, show="headings")
+    tree.pack()
+    # Agregar las cabeceras de la tabla
+    for i in range(len(columnas)):
+        tree.heading(i, text=columnas[i])
+    # Agregar los datos a la tabla
+    for factura in lista_facturas:
+        print(factura)
+        tree.insert('', 'end', values=(
+            lista_facturas["NumeroFactura"], lista_facturas["Cliente"], lista_facturas["MetodoPago"], lista_facturas["EstadoPago"], lista_facturas["ServiciosAdicionales"]))
