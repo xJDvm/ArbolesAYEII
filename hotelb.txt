@@ -1,4 +1,5 @@
-{
+[
+    {
     "name": "Ana Rodriguez",
     "position": "Gerente de Ventas",
     "salary": "3500",
@@ -7,12 +8,15 @@
         {
             "invoice_number": "123456",
             "amount": 1000,
-            "date": "2023-08-01"
+            "date": "2023-08-01",
+            "payment_method": "Tarjeta de crédito"
         },
         {
             "invoice_number": "789012",
             "amount": 2000,
-            "date": "2023-08-15"
+            "date": "2023-08-15",
+            "payment_method": "PayPal"
         }
     ]
 }
+]
