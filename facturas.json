@@ -1,58 +1,118 @@
 {
     "Hotel Maravilla": [
         {
-            "NumeroFactura": 1,
+            "NumeroFactura": "001",
             "Fecha": "2023-09-26",
-            "Cliente": "Juan P\u00c3\u00a9rez",
-            "MetodoPago": "Tarjeta de Cr\u00c3\u00a9dito",
+            "Cliente": "Juan Perez",
+            "MetodoPago": "Tarjeta de Credito",
             "EstadoPago": "Pagado",
-            "ServiciosAdicionales": "WiFi, Desayuno"
+            "ServiciosAdicionales": "WiFi, Desayuno",
+            "Precio": 200
         },
         {
-            "NumeroFactura": 2,
+            "NumeroFactura": "002",
             "Fecha": "2023-09-27",
-            "Cliente": "Ana Garc\u00c3\u00ada",
+            "Cliente": "Ana Garcia",
             "MetodoPago": "Efectivo",
             "EstadoPago": "Pendiente",
-            "ServiciosAdicionales": "WiFi"
+            "ServiciosAdicionales": "WiFi",
+            "Precio": 200
         },
         {
-            "NumeroFactura": 3,
-            "Fecha": "9/26/23",
-            "Cliente": "a",
-            "MetodoPago": "a",
-            "EstadoPago": "a",
-            "ServiciosAdicionales": "\n"
+            "NumeroFactura": "003",
+            "Fecha": "2023-09-29",
+            "Cliente": "Miguel Perez",
+            "MetodoPago": "Efectivo",
+            "EstadoPago": "Pagado",
+            "ServiciosAdicionales": "Desayuno",
+            "Precio": 200
         }
     ],
     "Hotel Luxury": [
         {
-            "NumeroFactura": 1,
+            "NumeroFactura": "001",
             "Fecha": "2023-09-25",
-            "Cliente": "Ana L\u00c3\u00b3pez",
-            "MetodoPago": "Tarjeta de D\u00c3\u00a9bito",
+            "Cliente": "Ana Lopez",
+            "MetodoPago": "Tarjeta de Debito",
             "EstadoPago": "Pendiente",
-            "ServiciosAdicionales": "Piscina, Cena de Lujo"
+            "ServiciosAdicionales": "Piscina, Cena de Lujo",
+            "Precio": 200
+        },
+        {
+            "NumeroFactura": "002",
+            "Fecha": "2023-09-26",
+            "Cliente": "Pedro Ramirez",
+            "MetodoPago": "Efectivo",
+            "EstadoPago": "Pagado",
+            "ServiciosAdicionales": "Desayuno",
+            "Precio": 250
+        },
+        {
+            "NumeroFactura": "003",
+            "Fecha": "2023-09-27",
+            "Cliente": "Maria Torres",
+            "MetodoPago": "Tarjeta de Credito",
+            "EstadoPago": "Pagado",
+            "ServiciosAdicionales": "WiFi",
+            "Precio": 300
         }
     ],
     "Hotel Cali": [
         {
-            "NumeroFactura": 1,
+            "NumeroFactura": "001",
             "Fecha": "2023-09-24",
-            "Cliente": "Carlos Rodr\u00c3\u00adguez",
+            "Cliente": "Carlos Rodriguez",
             "MetodoPago": "Efectivo",
             "EstadoPago": "Pagado",
-            "ServiciosAdicionales": "Gimnasio, Estacionamiento"
+            "ServiciosAdicionales": "Gimnasio, Estacionamiento",
+            "Precio": 200
+        },
+        {
+            "NumeroFactura": "002",
+            "Fecha": "2023-09-25",
+            "Cliente": "Luisa Martinez",
+            "MetodoPago": "Tarjeta de Credito",
+            "EstadoPago": "Pendiente",
+            "ServiciosAdicionales": "WiFi, Piscina",
+            "Precio": 220
+        },
+        {
+            "NumeroFactura": "003",
+            "Fecha": "2023-09-26",
+            "Cliente": "Andres Gonzalez",
+            "MetodoPago": "Efectivo",
+            "EstadoPago": "Pagado",
+            "ServiciosAdicionales": "Desayuno",
+            "Precio": 180
         }
     ],
     "Hotel Banana": [
         {
-            "NumeroFactura": 1,
+            "NumeroFactura": "001",
             "Fecha": "2023-09-23",
-            "Cliente": "Marta S\u00c3\u00a1nchez",
+            "Cliente": "Marta Sanchez",
             "MetodoPago": "Transferencia Bancaria",
             "EstadoPago": "Pendiente",
-            "ServiciosAdicionales": "Playa Privada, Excursi\u00c3\u00b3n en Bote"
+            "ServiciosAdicionales": "Playa Privada, Excursion en Bote",
+            "Precio": 200
+        },
+        {
+            "NumeroFactura": "002",
+            "Fecha": "2023-09-24",
+            "Cliente": "Eduardo Morales",
+            "MetodoPago": "Efectivo",
+            "EstadoPago": "Pagado",
+            "ServiciosAdicionales": "WiFi",
+            "Precio": 180
+        },
+        {
+            "NumeroFactura": "003",
+            "Fecha": "2023-09-25",
+            "Cliente": "Patricia Castro",
+            "MetodoPago": "Tarjeta de Debito",
+            "EstadoPago": "Pagado",
+            "ServiciosAdicionales": "Desayuno",
+            "Precio": 220
         }
     ]
 }

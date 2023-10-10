@@ -52,29 +52,46 @@ def recorrido_postorden(nodo):
         return nodo.factura
 
 # Función para mostrar la ventana con la lista de facturas
+class StatisticsUI:
+    def __init__(self, root, hotel_name):
+        self.root = root
+        self.hotel_name = hotel_name
+        self.root.title(f"Estadísticas - {self.hotel_name}")
 
+        # Importar el arreglo de facturas JSON
+        with open("facturas.json", "r") as f:
+            self.facturas = json.load(f)
 
-def mostrar_lista(hotel_name):
-    # Crear la ventana
-    ventana = tk.Toplevel()
-    ventana.title("Lista de facturas")
+        # Crear un cuadro de texto para mostrar las estadísticas
+        self.stats_text = tk.Text(root, wrap=tk.WORD, width=50, height=10)
+        self.stats_text.pack(padx=20, pady=10)
 
-    # Crear el árbol binario de búsqueda
-    nodo_raiz = crear_arbol_binario(facturas, hotel_name)
+        # Crear el botón para mostrar las estadísticas
+        self.show_stats_button = ttk.Button(root, text="Mostrar Estadísticas", command=self.mostrar_estadisticas)
+        self.show_stats_button.pack(pady=10)
 
-    # Realizar el recorrido en postorden del árbol binario
-    lista_facturas = recorrido_postorden(nodo_raiz)
+    def mostrar_estadisticas(self):
+        # Obtener la cantidad de reservaciones realizadas
+        num_reservaciones = len(self.facturas.get(self.hotel_name, []))
 
-    # Crear el árbol binario de búsqueda
-    columnas = ["Número de factura", "Cliente", "Método de pago",
-                "Estado de pago", "Servicios adicionales"]
-    tree = ttk.Treeview(ventana, columns=columnas, show="headings")
-    tree.pack()
-    # Agregar las cabeceras de la tabla
-    for i in range(len(columnas)):
-        tree.heading(i, text=columnas[i])
-    # Agregar los datos a la tabla
-    for factura in lista_facturas:
-        print(factura)
-        tree.insert('', 'end', values=(
-            lista_facturas["NumeroFactura"], lista_facturas["Cliente"], lista_facturas["MetodoPago"], lista_facturas["EstadoPago"], lista_facturas["ServiciosAdicionales"]))
+        # Obtener la cantidad de dinero facturado
+        total_facturado = sum(factura.get("Precio", 0) for factura in self.facturas.get(self.hotel_name, []))
+
+        # Mostrar las estadísticas en el cuadro de texto
+        self.stats_text.delete("1.0", tk.END)
+        self.stats_text.insert(tk.END, f"Reservaciones realizadas: {num_reservaciones}\n")
+        self.stats_text.insert(tk.END, f"Cantidad de dinero facturado: {total_facturado}\n")
+
+# Mapeo de archivos de empleados por hotel
+hotel_file_mapping = {
+    "Hotel Maravilla": "hotela.txt",
+    "Hotel Luxury": "hotelb.txt",
+    "Hotel Cali": "hotelc.txt",
+    "Hotel Banana": "hoteld.txt",
+}
+
+# Prueba para verificar el funcionamiento independiente del archivo
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = StatisticsUI(root, "Hotel Maravilla")
+    root.mainloop()

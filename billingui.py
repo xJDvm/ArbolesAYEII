@@ -29,7 +29,7 @@ class BillingUI:
         self.create_buttons()
 
     def create_table(self):
-        columns = ("Número de Factura", "Fecha", "Cliente", "Método de Pago", "Estado de Pago", "Servicios Adicionales")
+        columns = ("Número de Factura", "Fecha", "Cliente", "Método de Pago", "Estado de Pago", "Servicios Adicionales", "Precio")
         self.table = ttk.Treeview(self.factura_frame, columns=columns, show="headings")
         self.table.heading("Número de Factura", text="Número de Factura")
         self.table.heading("Fecha", text="Fecha")
@@ -37,6 +37,7 @@ class BillingUI:
         self.table.heading("Método de Pago", text="Método de Pago")
         self.table.heading("Estado de Pago", text="Estado de Pago")
         self.table.heading("Servicios Adicionales", text="Servicios Adicionales")
+        self.table.heading("Precio", text="Precio")
         
         for col in columns:
             self.table.column(col, width=120, anchor="center")
@@ -93,10 +94,16 @@ class BillingUI:
         estado_pago_entry = ttk.Entry(form_frame)
         estado_pago_entry.grid(row=4, column=1, padx=5, pady=5)
         
+        precio_label = ttk.Label(form_frame, text="Precio:")
+        precio_label.grid(row=5, column=0, padx=5, pady=5)
+        precio_entry = ttk.Entry(form_frame)
+        precio_entry.grid(row=5, column=1, padx=5, pady=5)
+        
         servicios_label = ttk.Label(form_frame, text="Servicios Adicionales:")
-        servicios_label.grid(row=5, column=0, padx=5, pady=5)
+        servicios_label.grid(row=6, column=0, padx=5, pady=5)
         servicios_entry = scrolledtext.ScrolledText(form_frame, width=30, height=4)
-        servicios_entry.grid(row=5, column=1, padx=5, pady=5)
+        servicios_entry.grid(row=6, column=1, padx=5, pady=5)
+        
         
         # Función para agregar la nueva factura
         def agregar_nueva_factura():
@@ -105,10 +112,11 @@ class BillingUI:
             cliente = cliente_entry.get()
             metodo_pago = metodo_pago_entry.get()
             estado_pago = estado_pago_entry.get()
+            precio = precio_entry.get()
             servicios_adicionales = servicios_entry.get("1.0", tk.END)
             
             if numero and fecha and cliente and metodo_pago and estado_pago:
-                nueva_factura = Factura(numero, fecha, cliente, metodo_pago, estado_pago, servicios_adicionales)
+                nueva_factura = Factura(numero, fecha, cliente, metodo_pago, estado_pago, servicios_adicionales, precio)
                 self.billing_manager.insert_factura(self.hotel_name, nueva_factura)
                 self.load_facturas_to_table()
                 factura_window.destroy()
@@ -118,19 +126,23 @@ class BillingUI:
         
         # Botón para agregar la factura
         agregar_button = ttk.Button(form_frame, text="Agregar Factura", command=agregar_nueva_factura)
-        agregar_button.grid(row=6, columnspan=2, padx=5, pady=10)
-    
+        agregar_button.grid(row=7, columnspan=2, padx=5, pady=10)
+
     def delete_factura(self):
         selected_item = self.table.selection()
         if not selected_item:
             messagebox.showerror("Error", "Por favor, seleccione una factura para eliminar.")
             return
-        
+
         confirmacion = messagebox.askyesno("Confirmar", "¿Está seguro de que desea eliminar esta factura?")
         if confirmacion:
             numero_factura = self.table.item(selected_item, "values")[0]
+            
+            # Eliminamos la factura de la tabla
+            self.table.delete(selected_item)
+            
+            # También eliminamos la factura de la estructura subyacente (el árbol AVL)
             self.billing_manager.eliminar_factura(self.hotel_name, numero_factura)
-            self.load_facturas_to_table()
             self.save_facturas()
             
     def load_facturas_to_table(self):
@@ -140,7 +152,7 @@ class BillingUI:
         facturas = self.billing_manager.get_facturas(self.hotel_name)
         for factura in facturas:
             self.table.insert("", "end", values=(factura.numero_factura, factura.fecha, factura.cliente,
-                                                 factura.metodo_pago, factura.estado_pago, factura.servicios_adicionales))
+                                                 factura.metodo_pago, factura.estado_pago, factura.servicios_adicionales, factura.precio))
     
     def save_facturas(self):
         self.billing_manager.guardar_facturas_en_json()
@@ -169,6 +181,8 @@ class BillingUI:
         info_text.insert("insert", f"Método de Pago: {factura.metodo_pago}\n")
         info_text.insert("insert", f"Estado de Pago: {factura.estado_pago}\n")
         info_text.insert("insert", f"Servicios Adicionales: {factura.servicios_adicionales}\n")
+        info_text.insert("insert", f"Precio: {factura.precio}\n")
+
         
         info_text.config(state=tk.DISABLED)
 

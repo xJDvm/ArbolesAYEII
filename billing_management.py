@@ -1,13 +1,14 @@
 import json
 
 class Factura:
-    def __init__(self, numero_factura, fecha, cliente, metodo_pago, estado_pago, servicios_adicionales):
+    def __init__(self, numero_factura, fecha, cliente, metodo_pago, estado_pago, servicios_adicionales, precio):
         self.numero_factura = numero_factura
         self.fecha = fecha
         self.cliente = cliente
         self.metodo_pago = metodo_pago
         self.estado_pago = estado_pago
         self.servicios_adicionales = servicios_adicionales
+        self.precio = precio
     
     def to_dict(self):
         return {
@@ -16,7 +17,8 @@ class Factura:
             "Cliente": self.cliente,
             "MetodoPago": self.metodo_pago,
             "EstadoPago": self.estado_pago,
-            "ServiciosAdicionales": self.servicios_adicionales
+            "ServiciosAdicionales": self.servicios_adicionales,
+            "Precio": self.precio
         }
 
 class NodoAVL:
@@ -194,7 +196,8 @@ class BillingManager:
                     factura_data["Cliente"],
                     factura_data["MetodoPago"],
                     factura_data["EstadoPago"],
-                    factura_data["ServiciosAdicionales"]
+                    factura_data["ServiciosAdicionales"],
+                    factura_data["Precio"]
                 )
                 self.avl_trees[hotel].insert(factura)
     
